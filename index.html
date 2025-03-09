@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD ASIF HASAN OVI - Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css?v=2.3">
+    <link rel="stylesheet" href="css/text-hover.css?v=1.0">
+    <!-- Seasonal effects are currently disabled but stylesheet is kept for future use -->
+    <link rel="stylesheet" href="css/seasonal-effects.css?v=1.0">
+    <!-- Immersive effects stylesheet -->
+    <link rel="stylesheet" href="css/immersive-effects.css?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        /* Add CSS variables for RGB values to support glow effects */
+        :root {
+            --primary-rgb: 51, 76, 176;
+            --primary-light-rgb: 76, 195, 208; 
+            --secondary-rgb: 53, 150, 166;
+        }
+        
+        html[data-theme="dark"] {
+            --primary-rgb: 76, 195, 208;
+            --primary-light-rgb: 37, 174, 190;
+            --secondary-rgb: 53, 150, 166;
+        }
+        
+        /* Hero paragraph hover effect */
+        .hero-paragraph {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .hero-paragraph .original-text,
+        .hero-paragraph .hover-text {
+            transition: opacity 0.4s ease;
+        }
+        
+        .hero-paragraph .original-text {
+            opacity: 1;
+        }
+        
+        .hero-paragraph .hover-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Word-by-word reveal effect */
+        .hero-paragraph .hover-text .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.3s ease;
+            margin-right: 4px; /* Add consistent spacing between words */
+        }
+        
+        /* Last word shouldn't have margin to avoid extra space at the end */
+        .hero-paragraph .hover-text .word:last-child {
+            margin-right: 0;
+        }
+        
+        .hero-paragraph:hover .original-text {
+            opacity: 0;
+        }
+        
+        .hero-paragraph:hover .hover-text {
+            opacity: 1;
+        }
+        
+        .hero-paragraph:hover .hover-text .word {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Enhanced flip card effect for hero image */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            display: block;
+            position: relative;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-radius: 30px;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg) !important;
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .flip-card-front {
+            background-color: var(--bg-color);
+            z-index: 2;
+        }
+        
+        .flip-card-back {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg) !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-weight: bold;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+        
+        .flip-card-back i {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        /* Make sure hero-image has proper dimensions */
+        .hero-image {
+            width: 300px;
+            height: auto;
+            margin: 0 auto;
+            position: relative;
+            z-index: 999 !important;
+        }
+        
+        /* NEW Improved skill item hover effect */
+        .skill-item {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .skill-item .skill-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+            border-radius: 10px;
+        }
+        
+        .skill-item:hover .skill-overlay {
+            opacity: 0.95;
+            transform: translateY(0);
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .skill-icon {
+            z-index: 5;
+        }
+        
+        .skill-overlay i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        /* Ensure relative positioning on all cards for absolute positioning of effects */
+        .project-card, 
+        .certification-card,
+        .service-item,
+        .contact-card,
+        .social-card,
+        .stat {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 3D scene containers */
+        .three-js-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero .three-js-container {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .skills .three-js-container {
+            opacity: 0.6;
+        }
+
+        .three-js-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 30%, var(--bg-color) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        section {
+            position: relative;
+        }
+
+        section > .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 3D model containers */
+        .skill-model-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #model-viewer-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        #model-viewer-container.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #model-viewer {
+            width: 80%;
+            height: 80%;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #model-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Complete transparency for sections that should not have backgrounds */
+        .about, 
+        .certifications, 
+        .contact {
+            background: transparent !important;
+        }
+        
+        /* Make service cards in About section transparent */
+        .about .service-item,
+        section#about .service-item {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .about .service-item:hover,
+        section#about .service-item:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-5px);
+            background-color: transparent !important;
+        }
+        
+        .about .service-icon,
+        section#about .service-icon {
+            color: var(--primary-color);
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+        
+        /* Make stat cards in About section transparent */
+        .about .stat,
+        section#about .stat {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* About paragraph hover effect - same as hero paragraph */
+        .about-intro-container {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .about-intro-container .original-text,
+        .about-intro-container .hover-text {
+            transition: opacity 0.4s ease;
+        }
+        
+        .about-intro-container .original-text {
+            opacity: 1;
+        }
+        
+        .about-intro-container .hover-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Word-by-word reveal effect for about paragraph */
+        .about-intro-container .hover-text .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.3s ease;
+            margin-right: 4px; /* Add consistent spacing between words */
+        }
+        
+        /* Last word shouldn't have margin to avoid extra space at the end */
+        .about-intro-container .hover-text .word:last-child {
+            margin-right: 0;
+        }
+        
+        .about-intro-container:hover .original-text {
+            opacity: 0;
+        }
+        
+        .about-intro-container:hover .hover-text {
+            opacity: 1;
+        }
+        
+        .about-intro-container:hover .hover-text .word {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .about .stat:hover,
+        section#about .stat:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-5px);
+            background-color: transparent !important;
+        }
+        
+        /* Make certification cards transparent */
+        .certifications .certification-card,
+        section#certifications .certification-card {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .certifications .certification-card:hover,
+        section#certifications .certification-card:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-5px);
+            background-color: transparent !important;
+        }
+        
+        .certifications .certification-icon,
+        section#certifications .certification-icon {
+            color: var(--primary-color);
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+        
+        /* Make contact cards transparent */
+        .contact .contact-card,
+        section#contact .contact-card {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .contact .contact-card:hover,
+        section#contact .contact-card:hover {
+            border-color: rgba(var(--primary-rgb), 0.5);
+            transform: translateY(-5px);
+            background-color: transparent !important;
+        }
+        
+        .contact .contact-icon,
+        section#contact .contact-icon {
+            color: var(--primary-color);
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+        
+        /* Make contact form transparent */
+        .contact .contact-form,
+        section#contact .contact-form {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: blur(5px) !important;
+            -webkit-backdrop-filter: blur(5px) !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+        }
+        
+        /* Input fields in contact form */
+        .contact .form-group input,
+        .contact .form-group textarea,
+        section#contact .form-group input,
+        section#contact .form-group textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(var(--primary-rgb), 0.2);
+        }
+        
+        /* Social card transparency */
+        .contact .social-card,
+        section#contact .social-card {
+            background: transparent !important;
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 2px solid rgba(var(--primary-rgb), 0.2);
+        }
+        
+        /* Force transparency on any card in these sections */
+        #about *, #certifications *, #contact * {
+            background-image: none !important;
+        }
+        
+        #about .glass-card, 
+        #about .glass-effect,
+        #certifications .glass-card, 
+        #certifications .glass-effect,
+        #contact .glass-card, 
+        #contact .glass-effect {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Override any glassmorphism in about, certifications and contact sections */
+        #about [class*="glass"], 
+        #certifications [class*="glass"], 
+        #contact [class*="glass"] {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Override card backgrounds */
+        #about [class*="card"], 
+        #certifications [class*="card"], 
+        #contact [class*="card"],
+        #about .service-item,
+        #about .stat {
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        
+        /* Remove any background images */
+        #about [style*="background"], 
+        #certifications [style*="background"], 
+        #contact [style*="background"] {
+            background: transparent !important;
+            background-image: none !important;
+        }
+    </style>
+    <script>
+        // Mark body as JS-loaded immediately
+        document.documentElement.className += ' js-loaded';
+    </script>
+</head>
+<body>
+    <!-- Interactive Fragments -->
+    <div class="fragments-container">
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+        <div class="fragment"></div>
+    </div>
+
+    <!-- Dynamic Background Pattern -->
+    <div class="dynamic-bg"></div>
+
+    <!-- Cursor elements -->
+    <div class="cursor-glow"></div>
+    <div class="cursor-glow-small"></div>
+
+    <!-- 3D Model Viewer Container (for displaying 3D models when clicked) -->
+    <div id="model-viewer-container">
+        <div id="model-viewer"></div>
+        <button id="model-close"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Header -->
+    <header class="scrolled-up">
+        <nav class="navbar">
+            <a href="#home" class="logo"><span>MD ASIF</span> HASAN OVI</a>
+            
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li>
+                <li><a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
+                <li><a href="#projects"><i class="fas fa-code-branch"></i> Projects</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li class="mobile-only"><button class="work-with-me-btn">Work With Me <i class="fas fa-arrow-right"></i></button></li>
+                <li class="mobile-only"><a href="#projects" class="project-btn">Project <i class="fas fa-code-branch"></i></a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <button class="work-with-me-btn">Work With Me <i class="fas fa-arrow-right"></i></button>
+                <a href="#projects" class="project-btn">Project <i class="fas fa-code-branch"></i></a>
+                <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content wrapper -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <!-- 3D Background Container for Hero -->
+            <div class="three-js-container" id="hero-3d-container"></div>
+            <div class="three-js-overlay"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Hi, I'm <span class="highlight">MD ASIF HASAN OVI</span></h1>
+                    <h2>UI/UX designer | AI Enthusiast | Tech Savvy</h2>
+                    <div class="hero-paragraph">
+                        <p class="original-text">Creating intuitive interfaces and intelligent AI solutions that solve real problems. I blend human-centered design with cutting-edge technology to deliver experiences that users love and businesses value.</p>
+                        <p class="hover-text" id="word-reveal-text">Creating shitty interfaces and half-intelligent AI solutions since 2024—because perfection is overrated, and deadlines are a myth</p>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn primary-btn">View My Work</a>
+                        <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://github.com/asif4568/" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/md-asif-hasan-ovi-17195225b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/AsifoviHEXA" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/asif.ovi.143/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="hero-image" style="position: relative; z-index: 999 !important; margin-top: -20px;">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="img.jpg" alt="MD ASIF HASAN OVI" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Do not trust AI</p>
+                                <small>Human creativity still matters</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="about-intro-container">
+                            <p class="about-intro original-text">UI/UX designer and AI developer passionate about creating elegant solutions that bridge design and technology. I transform complex challenges into seamless experiences that drive business value.</p>
+                            <p class="hover-text" id="about-word-reveal-text">Everything you think about me is a lie. No, I'm not always productive. No, I don't wake up at 5 AM to meditate. No, I don't actually enjoy fixing last-minute client 'ideas.' My AI isn't omniscient, my UI designs aren't flawless, and yes—I sometimes Google the most basic things. But hey, as long as it looks good and works (mostly), does the truth even matter?</p>
+                        </div>
+                        
+                        <div class="services-container">
+                            <div class="service-item">
+                                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                                <h4>UI/UX Design</h4>
+                                <p>Creating intuitive, user-centric interfaces that delight.</p>
+                            </div>
+                            
+                            <div class="service-item">
+                                <div class="service-icon"><i class="fas fa-robot"></i></div>
+                                <h4>AI Development</h4>
+                                <p>Building intelligent solutions that automate and innovate.</p>
+                            </div>
+                            
+                            <div class="service-item">
+                                <div class="service-icon"><i class="fas fa-code"></i></div>
+                                <h4>Custom Solutions</h4>
+                                <p>Combining design and AI for unique digital experiences.</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn primary-btn">Download CV</a>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">2+</span>
+                            <span class="stat-title">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-title">Projects Completed</span>
+                        </div>
+                        <div class="stat">
+                            <span id="visitor-count" class="stat-number">0</span>
+                            <span class="stat-title">Total Visitors</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <!-- 3D Background Container for Skills -->
+            <div class="three-js-container" id="skills-3d-container"></div>
+            <div class="three-js-overlay"></div>
+            
+            <div class="container">
+                <h2 class="section-title">My Skills</h2>
+                
+                <div class="skills-container">
+                    <!-- UI/UX Design -->
+                    <div class="skill-category">
+                        <div class="skill-category-header">
+                            <i class="fas fa-palette"></i>
+                            <h3>UI/UX Design</h3>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-pencil-ruler"></i></div>
+                                <h4>Wireframing & Prototyping</h4>
+                                <p>Figma, Adobe XD</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-users"></i></div>
+                                <h4>User-Centered Design</h4>
+                                <p>UCD & Design Thinking</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-hand-pointer"></i></div>
+                                <h4>Interaction Design</h4>
+                                <p>Usability Testing</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                                <h4>Responsive Design</h4>
+                                <p>Minimalist UI Approach</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI & Machine Learning -->
+                    <div class="skill-category">
+                        <div class="skill-category-header">
+                            <i class="fas fa-brain"></i>
+                            <h3>AI & Machine Learning</h3>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                                <h4>AI Agent Development</h4>
+                                <p>Automation & Integration</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-comment-dots"></i></div>
+                                <h4>Natural Language Processing</h4>
+                                <p>NLP & Text Analysis</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-cogs"></i></div>
+                                <h4>Model Fine-Tuning</h4>
+                                <p>Optimization Techniques</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-eye"></i></div>
+                                <h4>Computer Vision</h4>
+                                <p>Deep Learning</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Software Development -->
+                    <div class="skill-category">
+                        <div class="skill-category-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Software Development</h3>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-file-code"></i></div>
+                                <h4>Programming Languages</h4>
+                                <p>Python, Kotlin, VBA, DBMS</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-globe"></i></div>
+                                <h4>Web Development</h4>
+                                <p>HTML, CSS, JavaScript</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-database"></i></div>
+                                <h4>Database Management</h4>
+                                <p>Optimization & Design</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                                <h4>Version Control</h4>
+                                <p>Git & Collaborative Development</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Business & Product Strategy -->
+                    <div class="skill-category">
+                        <div class="skill-category-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Business & Product Strategy</h3>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-search"></i></div>
+                                <h4>Market Research</h4>
+                                <p>Competitive Analysis</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+                                <h4>Product Design</h4>
+                                <p>User Engagement Strategies</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                                <h4>Data-Driven Decisions</h4>
+                                <p>Analytics & Insights</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-bullseye"></i></div>
+                                <h4>Strategic Planning</h4>
+                                <p>Goal Setting & Execution</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tools & Technologies -->
+                    <div class="skill-category">
+                        <div class="skill-category-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Tools & Technologies</h3>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fab fa-figma"></i></div>
+                                <h4>Design Tools</h4>
+                                <p>Figma, Adobe XD, Sketch</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                                <h4>AI & ML Frameworks</h4>
+                                <p>TensorFlow, OpenAI API, PyTorch</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-server"></i></div>
+                                <h4>Development</h4>
+                                <p>Git, Firebase, REST APIs</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-overlay"><i class="fas fa-keyboard"></i>Ctrl+C & Ctrl+V</div>
+                                <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
+                                <h4>Project Management</h4>
+                                <p>Agile, Scrum, Kanban</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="certifications">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+                
+                <div class="certifications-container">
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Title</h3>
+                            <p class="cert-issuer">Issuing Organization</p>
+                            <p class="cert-date">Issue Date</p>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Title</h3>
+                            <p class="cert-issuer">Issuing Organization</p>
+                            <p class="cert-date">Issue Date</p>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Title</h3>
+                            <p class="cert-issuer">Issuing Organization</p>
+                            <p class="cert-date">Issue Date</p>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Title</h3>
+                            <p class="cert-issuer">Issuing Organization</p>
+                            <p class="cert-date">Issue Date</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <!-- 3D Background for Projects -->
+            <div class="three-js-container" id="projects-3d-container"></div>
+            <div class="three-js-overlay"></div>
+            
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://via.placeholder.com/600x400" alt="Project 1">
+                        </div>
+                        <div class="project-info">
+                            <h3>Coming Soon</h3>
+                            <p>This project is currently under development. Check back soon to see the finished work and all its exciting features.</p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn small-btn">Live Demo</a>
+                                <a href="#" class="btn small-btn secondary-btn">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://via.placeholder.com/600x400" alt="Project 2">
+                        </div>
+                        <div class="project-info">
+                            <h3>Coming Soon</h3>
+                            <p>This project is currently under development. Check back soon to see the finished work and all its exciting features.</p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn small-btn">Live Demo</a>
+                                <a href="#" class="btn small-btn secondary-btn">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://via.placeholder.com/600x400" alt="Project 3">
+                        </div>
+                        <div class="project-info">
+                            <h3>Coming Soon</h3>
+                            <p>This project is currently under development. Check back soon to see the finished work and all its exciting features.</p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="btn small-btn">Live Demo</a>
+                                <a href="#" class="btn small-btn secondary-btn">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-btn">
+                    <a href="#" class="btn primary-btn">See More Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                
+                <div class="contact-content">
+                    <!-- Left side - Contact Information -->
+                    <div class="contact-info">
+                        <!-- Email Card -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>mdasifhasanovi@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone Card -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <p>+880 1830915879</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Location Card -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Location</h3>
+                                <p>DSS, Birulia, Savar, Dhaka, Bangladesh</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media Icons -->
+                        <div class="social-card">
+                            <div class="social-icons">
+                                <a href="https://github.com/asif4568/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/md-asif-hasan-ovi-17195225b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://x.com/AsifoviHEXA" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/asif.ovi.143/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side - Contact Form -->
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Enter message subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn primary-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo & Description -->
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo"><span>MD ASIF</span> HASAN OVI</a>
+                    <p class="footer-tagline">UI/UX designer and AI developer creating intelligent digital experiences that solve real problems.</p>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="footer-nav">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> mdasifhasanovi@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +880 1830915879</li>
+                        <li><i class="fas fa-map-marker-alt"></i>DSS,Birulia,Savar, Dhaka, Bangladesh</li>
+                    </ul>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://github.com/asif4568/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/md-asif-hasan-ovi-17195225b/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/AsifoviHEXA" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/asif.ovi.143/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MD ASIF HASAN OVI. All rights reserved.</p>
+                <p>one_dot</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js?v=1.2"></script>
+    <script src="js/api.js?v=1.0"></script>
+    <script src="js/cursor.js?v=1.1"></script>
+    <script src="js/audio-player.js?v=1.0"></script>
+    <script src="js/fragments.js?v=1.1"></script>
+    <script src="js/seasonal-effects.js?v=1.0"></script>
+    
+    <!-- Word reveal script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to process word reveal for a given element
+            function processWordReveal(elementId) {
+                // Get the text element
+                const textElement = document.getElementById(elementId);
+                if (!textElement) return;
+                
+                // Get the text content
+                const text = textElement.textContent;
+                
+                // Clear the text element
+                textElement.textContent = '';
+                
+                // Split the text into words
+                const words = text.split(' ').filter(word => word.trim() !== ''); // Filter out empty strings
+                
+                // Create spans for each word and add to the element
+                words.forEach((word, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    // Don't add space to the text content, use margin instead
+                    span.textContent = word;
+                    // Add increasing delay for each word
+                    span.style.transitionDelay = (index * 0.05) + 's'; 
+                    textElement.appendChild(span);
+                });
+            }
+            
+            // Process both text elements
+            processWordReveal('word-reveal-text');
+            processWordReveal('about-word-reveal-text');
+        });
+    </script>
+    
+    <!-- Immersive effects scripts -->
+    <script src="js/immersive-effects.js?v=1.1"></script>
+    <script src="js/particles.js?v=1.0"></script>
+    <script src="js/card-effects.js?v=1.0"></script>
+    
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Custom 3D effects -->
+    <script src="js/three-basic.js?v=1.0"></script>
+    <script>
+        // Immediately set theme from localStorage or system preference
+        const storedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', storedTheme);
+        
+        // Initialize UI elements and set up event listeners when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeSwitcher = document.querySelector('.theme-toggle');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const header = document.querySelector('header');
+            const workWithMeBtn = document.querySelectorAll('.work-with-me-btn');
+            
+            // Update theme icon initially
+            updateThemeIcon(storedTheme);
+            
+            // Toggle mobile menu
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (navLinks && navLinks.classList.contains('active') && 
+                    !navLinks.contains(event.target) && 
+                    !hamburger.contains(event.target)) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+            
+            // Close mobile menu when clicking on navigation links
+            const navLinkElements = document.querySelectorAll('.nav-links a');
+            navLinkElements.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (hamburger && navLinks.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    }
+                });
+            });
+            
+            // Improved theme toggle with smooth transition
+            if (themeSwitcher) {
+                themeSwitcher.addEventListener('click', function() {
+                    // Prevent multiple clicks during transition
+                    if (document.body.classList.contains('theme-transition')) {
+                        return;
+                    }
+                    
+                    // Add transition class to body
+                    document.body.classList.add('theme-transition');
+                    document.documentElement.classList.add('theme-changing');
+                    
+                    // Get current and new theme
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    
+                    // Update theme icon immediately to prevent flashing
+                    updateThemeIcon(newTheme);
+                    
+                    // Small delay before changing theme to allow icon transition
+                    setTimeout(() => {
+                        // Change theme
+                        document.documentElement.setAttribute('data-theme', newTheme);
+                        localStorage.setItem('theme', newTheme);
+                        
+                        // Dispatch theme change event for seasonal effects
+                        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+                        
+                        // Remove transition class after transition completes
+                        setTimeout(() => {
+                            document.body.classList.remove('theme-transition');
+                            document.documentElement.classList.remove('theme-changing');
+                        }, 300); // Match this with your CSS transition time
+                    }, 50);
+                });
+            }
+            
+            // Update theme icon based on current theme
+            function updateThemeIcon(theme) {
+                const icons = document.querySelectorAll('.theme-toggle i');
+                icons.forEach(icon => {
+                    if (theme === 'dark') {
+                        icon.className = 'fas fa-sun';
+                    } else {
+                        icon.className = 'fas fa-moon';
+                    }
+                });
+            }
+            
+            // Work with me button action - scroll to contact section
+            if (workWithMeBtn) {
+                workWithMeBtn.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+            }
+            
+            // Navbar scroll behavior
+            let lastScrollTop = 0;
+            const scrollThreshold = 100;
+            let scrollingDirection = 'none';
+            let ticking = false;
+            
+            function handleScroll() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Always add the scrolled class when scrolled down at all for styling
+                if (scrollTop > 20) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Determine scrolling direction
+                if (scrollTop > lastScrollTop) {
+                    scrollingDirection = 'down';
+                } else if (scrollTop < lastScrollTop) {
+                    scrollingDirection = 'up';
+                }
+                
+                // Handle showing/hiding based on scroll direction with improved reliability
+                if (scrollingDirection === 'down' && scrollTop > scrollThreshold) {
+                    // Scrolling DOWN past threshold - hide navbar
+                    if (!navLinks.classList.contains('active')) { // Don't hide if menu is open
+                        header.classList.remove('scrolled-up');
+                        header.classList.add('scrolled-down');
+                    }
+                } else if (scrollingDirection === 'up') {
+                    // Scrolling UP - show navbar
+                    header.classList.remove('scrolled-down');
+                    header.classList.add('scrolled-up');
+                } else if (scrollTop <= 20) {
+                    // At top of page - always show navbar
+                    header.classList.remove('scrolled-down');
+                    header.classList.add('scrolled-up');
+                }
+                
+                // Update last scroll position
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+                ticking = false;
+            }
+            
+            // Use requestAnimationFrame for better performance
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+            
+            // Initial call
+            handleScroll();
+        });
+        
+        // Visitor counter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if this is a new session
+            const lastVisit = localStorage.getItem('lastVisit');
+            const now = new Date().getTime();
+            const visitorCountElement = document.getElementById('visitor-count');
+            
+            // Consider it a new session if last visit was more than 30 minutes ago or first time
+            if (!lastVisit || (now - parseInt(lastVisit)) > 30 * 60 * 1000) {
+                // Set this visit time
+                localStorage.setItem('lastVisit', now.toString());
+                
+                // Increment counter using a simple API call or local storage
+                let count = localStorage.getItem('visitorCount') || 0;
+                count = parseInt(count) + 1;
+                localStorage.setItem('visitorCount', count.toString());
+                
+                // Display with animation
+                animateCounter(0, count);
+            } else {
+                // Not a new session, just display current count
+                const count = localStorage.getItem('visitorCount') || 0;
+                animateCounter(0, parseInt(count));
+            }
+            
+            // Function to animate counter
+            function animateCounter(start, end) {
+                // For small numbers, animate slowly
+                const duration = 2000; // 2 seconds
+                const frameDuration = 1000/60; // 60fps
+                const totalFrames = Math.min(60, duration / frameDuration);
+                const counterIncrement = (end - start) / totalFrames;
+                
+                let currentCount = start;
+                const counter = setInterval(() => {
+                    currentCount += counterIncrement;
+                    
+                    if (currentCount >= end) {
+                        clearInterval(counter);
+                        visitorCountElement.textContent = end;
+                    } else {
+                        visitorCountElement.textContent = Math.floor(currentCount);
+                    }
+                }, frameDuration);
+            }
+        });
+    </script>
+
+    <!-- Audio Player -->
+    <div class="audio-player">
+        <button class="audio-toggle" id="audioToggle" aria-label="Toggle music">
+            <i class="fas fa-music"></i>
+        </button>
+        <input type="range" class="volume-control" id="volumeControl" min="0" max="1" step="0.1" value="0.5">
+        <audio id="bgMusic" loop>
+            <source src="audio/calm-ambient.mp3" type="audio/mpeg">
+            <source src="audio/background-music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+</body>
+</html> 

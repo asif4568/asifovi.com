@@ -1,0 +1,314 @@
+/* 3D Interactive Elements */
+.three-js-container {
+    transition: transform 0.3s ease;
+}
+
+/* Scroll Trigger Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Different animations for different elements */
+.section-title.animate-on-scroll {
+    transform: translateY(-30px);
+}
+
+.skill-item.animate-on-scroll,
+.service-item.animate-on-scroll,
+.certification-card.animate-on-scroll,
+.contact-card.animate-on-scroll {
+    transform: scale(0.9);
+}
+
+.project-card.animate-on-scroll {
+    transform: translateX(-30px);
+}
+
+/* Enhanced Cursor Effects */
+.cursor-glow {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(var(--primary-rgb), 0.2);
+    mix-blend-mode: screen;
+    z-index: 9999;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor-glow-small {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(var(--primary-rgb), 0.8);
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-active.cursor-glow {
+    opacity: 1;
+    width: 60px;
+    height: 60px;
+}
+
+.cursor-active.cursor-glow-small {
+    background: #fff;
+}
+
+.cursor-pointer {
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(var(--primary-rgb), 0.3) !important;
+}
+
+.cursor-view {
+    width: 80px !important;
+    height: 80px !important;
+    background: rgba(var(--primary-light-rgb), 0.3) !important;
+}
+
+.cursor-info {
+    width: 60px !important;
+    height: 60px !important;
+    background: rgba(var(--secondary-rgb), 0.3) !important;
+}
+
+/* Project Card Tilt Effect */
+.project-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.project-card .project-img,
+.project-card .project-info {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Mobile Optimization - Disable some effects on small screens */
+@media (max-width: 768px) {
+    .cursor-glow, .cursor-glow-small {
+        display: none;
+    }
+    
+    .project-card {
+        transform: none !important;
+    }
+}
+
+/* Water Ripple Canvas */
+#water-ripple {
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* Enhanced Magnetic Effect */
+.btn, .project-card, .service-item, .skill-item {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    will-change: transform;
+}
+
+.btn:hover, .project-card:hover, .service-item:hover, .skill-item:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+/* Enhanced Image Hover */
+.project-img, .profile-image {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.project-img img, .profile-image img {
+    transition: transform 0.5s ease-out;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+/* Section Highlight Effect */
+.scroll-highlight {
+    position: relative;
+}
+
+.scroll-highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 0 rgba(var(--primary-rgb), 0);
+    animation: pulse 2s ease-out;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 30px rgba(var(--primary-rgb), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+    }
+}
+
+/* Kinetic Typography Animation */
+.kinetic-char {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+}
+
+.kinetic-hover {
+    color: var(--primary-color);
+}
+
+/* Different animations for different characters */
+.kinetic-char:nth-child(3n) {
+    animation-name: float-1;
+}
+
+.kinetic-char:nth-child(3n+1) {
+    animation-name: float-2;
+}
+
+.kinetic-char:nth-child(3n+2) {
+    animation-name: float-3;
+}
+
+@keyframes float-1 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float-2 {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-7px) rotate(-5deg); }
+}
+
+@keyframes float-3 {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.1); }
+}
+
+/* Smooth page transition effects */
+.container {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    #water-ripple {
+        opacity: 0.4 !important;
+    }
+    
+    .btn, .project-card, .service-item, .skill-item {
+        transform: none !important;
+    }
+}
+
+/* Enhance WebGL stacking context */
+.three-js-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    transform: translateZ(-10px);
+}
+
+/* Enhanced section styling to ensure proper stacking context */
+section {
+    position: relative;
+    isolation: isolate;
+    transform-style: flat; /* Enforce flat for content */
+}
+
+/* Ensure content always renders above WebGL */
+section > .container {
+    isolation: isolate;
+    position: relative;
+    z-index: 5;
+    transform: translateZ(5px); /* Small 3D transform to force a new stacking context */
+}
+
+/* Enhanced hero image stacking */
+.hero-image {
+    isolation: isolate;
+    position: relative;
+    z-index: 10;
+    transform: translateZ(5px);
+}
+
+/* Enhanced profile image styling */
+.profile-image {
+    isolation: isolate;
+    position: relative;
+    z-index: 15;
+    transform: translateZ(10px); /* Higher value to ensure it's always on top */
+    will-change: transform;
+}
+
+/* Add depth to containers */
+.container {
+    position: relative;
+    z-index: 5;
+}
+
+/* Make sure all important content stays above WebGL */
+h1, h2, h3, p, a, button, img, form, input, textarea {
+    position: relative;
+    z-index: auto; /* Let stacking context handle it */
+}
+
+/* Profile Image Protection */
+.profile-image-mask {
+    position: absolute;
+    background: transparent;
+    z-index: 15;
+    pointer-events: none;
+    box-shadow: 0 0 0 5000px rgba(0, 0, 0, 0.01); /* Creates a very subtle mask */
+}
+
+/* Override 3D transforms on profile image */
+.profile-image {
+    transform: none !important;
+    transform-style: flat !important;
+    perspective: none !important;
+    z-index: 20;
+    position: relative;
+}
+
+/* Override canvas effects that might leak through */
+.three-js-container canvas,
+.three-js-container * {
+    pointer-events: none;
+    z-index: -10 !important;
+} 
