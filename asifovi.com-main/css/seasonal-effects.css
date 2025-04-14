@@ -1,0 +1,529 @@
+/* Seasonal Effects CSS */
+
+/* Global Seasonal Variables */
+:root {
+    --winter-accent-color: #a8d9ff;
+    --winter-shadow-color: rgba(120, 170, 255, 0.2);
+    --spring-accent-color: #a8ffb0;
+    --spring-shadow-color: rgba(120, 255, 130, 0.2);
+    
+    /* Enhanced Arctic Theme Colors - More Vibrant */
+    --neon-blue-color: #18c8ff;
+    --neon-blue-bright: #00e5ff;
+    --neon-blue-glow: 0 0 10px rgba(0, 229, 255, 0.7), 0 0 20px rgba(0, 229, 255, 0.4);
+    --ice-color: rgba(210, 249, 255, 0.3);
+    --ice-border: rgba(147, 223, 255, 0.5);
+    --ice-shadow: 0 0 20px rgba(147, 223, 255, 0.35);
+    --ice-inner-shadow: inset 0 0 20px rgba(147, 223, 255, 0.15);
+    --arctic-bg-overlay: linear-gradient(120deg, rgba(145, 207, 255, 0.05), rgba(10, 120, 200, 0.07));
+    
+    /* Glass Effect Variables */
+    --glass-opacity: 0.1;
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+}
+
+/* Winter Theme */
+body.winter-theme {
+    --winter-accent-color: #a8d9ff;
+    --winter-shadow-color: rgba(120, 170, 255, 0.2);
+}
+
+/* Add winter styling to various elements when winter theme is active */
+body.winter-theme .hero::before {
+    background: radial-gradient(ellipse at center, rgba(169, 217, 255, 0.15), transparent 70%);
+}
+
+body.winter-theme .hero::after {
+    background: radial-gradient(ellipse at center, rgba(169, 217, 255, 0.1), transparent 70%);
+}
+
+/* Blue winter tint for glass cards */
+body.winter-theme .skill-item,
+body.winter-theme .project-card,
+body.winter-theme .certification-card,
+body.winter-theme .contact-card,
+body.winter-theme .service-item,
+body.winter-theme .social-card,
+body.winter-theme .stat {
+    border-color: rgba(169, 217, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(120, 170, 255, 0.1);
+}
+
+body.winter-theme .skill-item:hover,
+body.winter-theme .project-card:hover,
+body.winter-theme .certification-card:hover,
+body.winter-theme .contact-card:hover,
+body.winter-theme .service-item:hover,
+body.winter-theme .social-card:hover,
+body.winter-theme .stat:hover {
+    border-color: rgba(169, 217, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(120, 170, 255, 0.2);
+}
+
+/* Winter icon color adjustments - Enhanced specificity */
+body.winter-theme .skill-icon i,
+body.winter-theme .service-icon i,
+body.winter-theme .certification-icon i,
+body.winter-theme .contact-icon i,
+html[data-theme="light"] body.winter-theme .skill-icon i,
+html[data-theme="light"] body.winter-theme .service-icon i,
+html[data-theme="light"] body.winter-theme .certification-icon i,
+html[data-theme="light"] body.winter-theme .contact-icon i,
+html[data-theme="dark"] body.winter-theme .skill-icon i,
+html[data-theme="dark"] body.winter-theme .service-icon i,
+html[data-theme="dark"] body.winter-theme .certification-icon i,
+html[data-theme="dark"] body.winter-theme .contact-icon i {
+    color: var(--winter-accent-color) !important;
+}
+
+/* Winter snowflake icon for winter theme logo */
+body.winter-theme .logo::after {
+    content: '❄️';
+    position: absolute;
+    top: -5px;
+    right: -20px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    animation: winter-float 3s ease-in-out infinite;
+}
+
+@keyframes winter-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(10deg);
+    }
+}
+
+/* Add a subtle icy border to buttons */
+body.winter-theme .btn {
+    border-color: rgba(169, 217, 255, 0.3);
+}
+
+body.winter-theme .btn:hover {
+    border-color: rgba(169, 217, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(120, 170, 255, 0.2);
+}
+
+/* Spring Theme */
+body.spring-theme {
+    --spring-accent-color: #a8ffb0;
+    --spring-shadow-color: rgba(120, 255, 130, 0.2);
+}
+
+/* Add spring styling to various elements when spring theme is active */
+body.spring-theme .hero::before {
+    background: radial-gradient(ellipse at center, rgba(169, 255, 176, 0.15), transparent 70%);
+}
+
+body.spring-theme .hero::after {
+    background: radial-gradient(ellipse at center, rgba(169, 255, 176, 0.1), transparent 70%);
+}
+
+/* Green spring tint for glass cards */
+body.spring-theme .skill-item,
+body.spring-theme .project-card,
+body.spring-theme .certification-card,
+body.spring-theme .contact-card,
+body.spring-theme .service-item,
+body.spring-theme .social-card,
+body.spring-theme .stat {
+    border-color: rgba(169, 255, 176, 0.2);
+    box-shadow: 0 8px 32px rgba(120, 255, 130, 0.1);
+}
+
+body.spring-theme .skill-item:hover,
+body.spring-theme .project-card:hover,
+body.spring-theme .certification-card:hover,
+body.spring-theme .contact-card:hover,
+body.spring-theme .service-item:hover,
+body.spring-theme .social-card:hover,
+body.spring-theme .stat:hover {
+    border-color: rgba(169, 255, 176, 0.4);
+    box-shadow: 0 15px 35px rgba(120, 255, 130, 0.2);
+}
+
+/* Spring icon color adjustments - Enhanced specificity */
+body.spring-theme .skill-icon i,
+body.spring-theme .service-icon i,
+body.spring-theme .certification-icon i,
+body.spring-theme .contact-icon i,
+html[data-theme="light"] body.spring-theme .skill-icon i,
+html[data-theme="light"] body.spring-theme .service-icon i,
+html[data-theme="light"] body.spring-theme .certification-icon i,
+html[data-theme="light"] body.spring-theme .contact-icon i,
+html[data-theme="dark"] body.spring-theme .skill-icon i,
+html[data-theme="dark"] body.spring-theme .service-icon i,
+html[data-theme="dark"] body.spring-theme .certification-icon i,
+html[data-theme="dark"] body.spring-theme .contact-icon i {
+    color: var(--spring-accent-color) !important;
+}
+
+/* Spring flower icon for spring theme logo */
+body.spring-theme .logo::after {
+    content: '🌱';
+    position: absolute;
+    top: -5px;
+    right: -20px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    animation: spring-float 3s ease-in-out infinite;
+}
+
+@keyframes spring-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+/* Add a subtle green border to buttons */
+body.spring-theme .btn {
+    border-color: rgba(169, 255, 176, 0.3);
+}
+
+body.spring-theme .btn:hover {
+    border-color: rgba(169, 255, 176, 0.5);
+    box-shadow: 0 5px 15px rgba(120, 255, 130, 0.2);
+}
+
+/* Snowfall Canvas */
+#snowfall-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Arctic Enhanced Theme */
+body.arctic-enhanced {
+    background-image: var(--arctic-bg-overlay);
+    background-attachment: fixed;
+}
+
+/* Neon Text Accents - Enhanced with brighter colors and sharper glow */
+.neon-accent {
+    color: var(--neon-blue-bright) !important;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.8), 0 0 10px rgba(0, 229, 255, 0.5) !important;
+    transition: all 0.2s ease !important;
+}
+
+.neon-accent:hover {
+    color: #5dffff !important;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 1), 0 0 15px rgba(0, 229, 255, 0.7) !important;
+    transform: scale(1.05);
+}
+
+/* Neon Border Elements - Enhanced with higher contrast */
+.neon-border {
+    border: 1px solid var(--ice-border) !important;
+    box-shadow: var(--ice-shadow), var(--ice-inner-shadow) !important;
+    transition: all 0.3s ease !important;
+}
+
+.neon-border:hover {
+    border-color: rgba(0, 229, 255, 0.7) !important;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.2) !important;
+}
+
+/* Ice Refraction Effect */
+.ice-refraction {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.ice-refraction::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0) 80%
+    );
+    opacity: 0;
+    transform: scale(1.5);
+    z-index: -1;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ice-refraction:hover::before {
+    opacity: 0.9;
+    transform: scale(1);
+    animation: ice-shimmer 2s infinite;
+}
+
+/* Add a prismatic edge effect on hover */
+.ice-refraction::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(120deg, 
+        rgba(0, 229, 255, 0) 20%, 
+        rgba(0, 229, 255, 0.2) 40%, 
+        rgba(147, 223, 255, 0.3) 50%, 
+        rgba(0, 229, 255, 0.2) 60%, 
+        rgba(0, 229, 255, 0) 80%
+    );
+    opacity: 0;
+    mix-blend-mode: overlay;
+    transition: all 0.5s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.ice-refraction:hover::after {
+    opacity: 1;
+    animation: prismatic-shift 3s infinite alternate;
+}
+
+/* Enhanced Glass Effect for Cards */
+body.arctic-enhanced .skill-item,
+body.arctic-enhanced .project-card,
+body.arctic-enhanced .certification-card,
+body.arctic-enhanced .contact-card,
+body.arctic-enhanced .service-item,
+body.arctic-enhanced .stat {
+    background: rgba(240, 250, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--ice-border) !important;
+    box-shadow: var(--ice-shadow) !important;
+}
+
+/* Frost filter effect on images */
+body.arctic-enhanced img {
+    filter: brightness(1.05) contrast(1.02) saturate(0.95) !important;
+    transition: all 0.3s ease;
+}
+
+body.arctic-enhanced img:hover {
+    filter: brightness(1.1) contrast(1.05) saturate(1) !important;
+}
+
+/* Add sparkles to buttons */
+body.arctic-enhanced .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+body.arctic-enhanced .btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+body.arctic-enhanced .btn:hover::after {
+    opacity: 0.3;
+    animation: sparkle 3s infinite linear;
+}
+
+/* Animations */
+@keyframes ice-shimmer {
+    0% {
+        opacity: 0.7;
+        background-position: 0% 0%;
+    }
+    50% {
+        opacity: 1;
+        background-position: 100% 100%;
+    }
+    100% {
+        opacity: 0.7;
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes prismatic-shift {
+    0% {
+        background-position: 0% 50%;
+        opacity: 0.7;
+    }
+    50% {
+        background-position: 100% 50%;
+        opacity: 1;
+    }
+    100% {
+        background-position: 0% 50%;
+        opacity: 0.7;
+    }
+}
+
+@keyframes sparkle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulsing glow for key elements */
+.skill-icon, .service-icon, .certification-icon, .contact-icon {
+    animation: pulse-glow 4s infinite alternate;
+    filter: drop-shadow(0 0 3px rgba(0, 180, 255, 0.5)) !important;
+}
+
+@keyframes pulse-glow {
+    0% {
+        filter: drop-shadow(0 0 3px rgba(0, 180, 255, 0.5)) !important;
+    }
+    50% {
+        filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.8)) !important;
+    }
+    100% {
+        filter: drop-shadow(0 0 3px rgba(0, 180, 255, 0.5)) !important;
+    }
+}
+
+/* Dark theme specific adjustments */
+html[data-theme="dark"] body.arctic-enhanced {
+    background-image: linear-gradient(120deg, rgba(0, 30, 60, 0.5), rgba(5, 15, 40, 0.4));
+}
+
+html[data-theme="dark"] .neon-border {
+    border-color: rgba(0, 229, 255, 0.3) !important;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 15px rgba(0, 229, 255, 0.05) !important;
+}
+
+html[data-theme="dark"] .neon-border:hover {
+    border-color: rgba(0, 229, 255, 0.7) !important;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.35), inset 0 0 20px rgba(0, 229, 255, 0.15) !important;
+}
+
+/* Enhance navbar with arctic theme */
+body.arctic-enhanced header {
+    background: rgba(10, 20, 40, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.3) !important;
+}
+
+body.arctic-enhanced header.scrolled {
+    box-shadow: 0 5px 20px rgba(0, 229, 255, 0.2) !important;
+}
+
+/* Special glass morphism for about section services */
+body.arctic-enhanced .service-item {
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(0, 229, 255, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05) !important;
+}
+
+body.arctic-enhanced .service-item:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(0, 229, 255, 0.4) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), inset 0 0 30px rgba(0, 229, 255, 0.1) !important;
+}
+
+/* Improved frost filter effect on images for sharper display */
+body.arctic-enhanced img {
+    filter: brightness(1.08) contrast(1.05) saturate(0.95) !important;
+    transition: all 0.3s ease;
+}
+
+body.arctic-enhanced img:hover {
+    filter: brightness(1.15) contrast(1.08) saturate(1.05) !important;
+}
+
+/* Light Mode Specific Enhancements */
+html[data-theme="light"] body.arctic-enhanced {
+    background-image: linear-gradient(120deg, rgba(220, 240, 255, 0.4), rgba(235, 245, 255, 0.3));
+}
+
+html[data-theme="light"] .neon-border {
+    border-color: rgba(0, 180, 255, 0.3) !important;
+    box-shadow: 0 5px 15px rgba(0, 180, 255, 0.15), inset 0 0 10px rgba(0, 180, 255, 0.05) !important;
+}
+
+html[data-theme="light"] .neon-border:hover {
+    border-color: rgba(0, 180, 255, 0.5) !important;
+    box-shadow: 0 8px 25px rgba(0, 180, 255, 0.25), inset 0 0 15px rgba(0, 180, 255, 0.1) !important;
+}
+
+html[data-theme="light"] .neon-accent {
+    color: #0096d9 !important;
+    text-shadow: 0 0 5px rgba(0, 150, 217, 0.5), 0 0 10px rgba(0, 150, 217, 0.3) !important;
+}
+
+html[data-theme="light"] .neon-accent:hover {
+    color: #00b4ff !important;
+    text-shadow: 0 0 8px rgba(0, 180, 255, 0.7), 0 0 15px rgba(0, 180, 255, 0.4) !important;
+}
+
+html[data-theme="light"] body.arctic-enhanced .about-content,
+html[data-theme="light"] body.arctic-enhanced .project-card,
+html[data-theme="light"] body.arctic-enhanced .certification-card {
+    --glass-opacity: 0.15;
+    background: rgba(255, 255, 255, var(--glass-opacity)) !important;
+    box-shadow: 0 10px 30px rgba(0, 100, 200, 0.1) !important;
+}
+
+/* Enhanced Dark Theme Specific Adjustments */
+html[data-theme="dark"] body.arctic-enhanced {
+    background-image: linear-gradient(120deg, rgba(0, 30, 60, 0.5), rgba(5, 15, 40, 0.4));
+}
+
+html[data-theme="dark"] body.arctic-enhanced .about-content,
+html[data-theme="dark"] body.arctic-enhanced .project-card,
+html[data-theme="dark"] body.arctic-enhanced .certification-card {
+    --glass-opacity: 0.07;
+    background: rgba(20, 30, 50, var(--glass-opacity)) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+html[data-theme="light"] body.arctic-enhanced header {
+    background: rgba(240, 248, 255, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 180, 255, 0.2) !important;
+}
+
+html[data-theme="light"] body.arctic-enhanced header.scrolled {
+    box-shadow: 0 5px 20px rgba(0, 180, 255, 0.15) !important;
+}
+
+/* Fix any other potential green shadows */
+.neon-accent, 
+.fas, .fab, .far, .social-icons i {
+    filter: drop-shadow(0 0 2px rgba(0, 180, 255, 0.4)) !important;
+    color: var(--neon-blue-color) !important;
+}
+
+/* Ensure consistent colors throughout light and dark themes */
+html[data-theme="dark"] .neon-accent,
+html[data-theme="dark"] .fas, 
+html[data-theme="dark"] .fab, 
+html[data-theme="dark"] .far,
+html[data-theme="dark"] .social-icons i {
+    filter: drop-shadow(0 0 3px rgba(0, 229, 255, 0.5)) !important;
+}
+
+html[data-theme="light"] .neon-accent,
+html[data-theme="light"] .fas, 
+html[data-theme="light"] .fab, 
+html[data-theme="light"] .far,
+html[data-theme="light"] .social-icons i {
+    filter: drop-shadow(0 0 2px rgba(0, 150, 220, 0.4)) !important;
+} 
