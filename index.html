@@ -1379,37 +1379,27 @@
 
                     <!-- Right side - Contact Form -->
                     <div class="contact-form">
-                                                <form action="https://api.web3forms.com/submit" method="POST">
-                    
-                        <!-- Access Key for Web3Forms -->
-                        <input type="hidden" name="access_key" value="f726b3a5-52e5-4f23-bf97-c111ebecf9db">
-                    
-                        <!-- Form Inputs with Names -->
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
-                        </div>
-                    
-                        <!-- Honeypot Spam Protection -->
-                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                    
-                        <!-- Optional Custom Success Page (Uncomment if needed) -->
-                        <!-- <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html"> -->
-                    
-                        <!-- Submit Button -->
-                        <button type="submit">Submit Form</button>
-                    </form>
-
+                        <form action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="f726b3a5-52e5-4f23-bf97-c111ebecf9db">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Enter message subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" rows="5" placeholder="Write your message here..."
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn primary-btn">Send Message</button>
+                        </form>
                     </div>
                 </div>
             </div>
