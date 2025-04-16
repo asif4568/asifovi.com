@@ -1379,31 +1379,65 @@
 
                     <!-- Right side - Contact Form -->
                     <div class="contact-form">
-                     <form action="https://api.web3forms.com/submit" method="POST">
-                              <input type="hidden" name="access_key" value="f726b3a5-52e5-4f23-bf97-c111ebecf9db">
+                     <div class="contact-form">
+                              <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="f726b3a5-52e5-4f23-bf97-c111ebecf9db" />
                             
-                              <div class="form-group">
+                                <div class="form-group">
                                   <label for="name">Full Name</label>
-                                  <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                              </div>
+                                  <input type="text" id="name" name="name" placeholder="Enter your name" required />
+                                </div>
                             
-                              <div class="form-group">
+                                <div class="form-group">
                                   <label for="email">Email Address</label>
-                                  <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                              </div>
+                                  <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                                </div>
                             
-                              <div class="form-group">
+                                <div class="form-group">
                                   <label for="subject">Subject</label>
-                                  <input type="text" id="subject" name="subject" placeholder="Enter message subject" required>
-                              </div>
+                                  <input type="text" id="subject" name="subject" placeholder="Enter message subject" required />
+                                </div>
                             
-                              <div class="form-group">
+                                <div class="form-group">
                                   <label for="message">Your Message</label>
                                   <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
-                              </div>
+                                </div>
                             
-                              <button type="submit" class="btn primary-btn">Send Message</button>
-                      </form>
+                                <button type="submit" class="btn primary-btn">Send Message</button>
+                                <p id="form-status" style="margin-top: 10px;"></p>
+                              </form>
+                            </div>
+                            
+                            <script>
+                              const form = document.getElementById("contact-form");
+                              const status = document.getElementById("form-status");
+                            
+                              form.addEventListener("submit", async (e) => {
+                                e.preventDefault();
+                                status.innerText = "Sending...";
+                                const formData = new FormData(form);
+                            
+                                const response = await fetch(form.action, {
+                                  method: form.method,
+                                  body: formData,
+                                  headers: {
+                                    Accept: "application/json",
+                                  },
+                                });
+                            
+                                const result = await response.json();
+                            
+                                if (response.ok) {
+                                  status.style.color = "green";
+                                  status.innerText = "✅ Message sent successfully!";
+                                  form.reset();
+                                } else {
+                                  status.style.color = "red";
+                                  status.innerText = result.message || "❌ Something went wrong!";
+                                }
+                              });
+                            </script>
+
                         
                     </div>
                 </div>
