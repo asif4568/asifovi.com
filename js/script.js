@@ -82,52 +82,54 @@ function animateCounter(start, end, element) {
 function initContactForm() {
   const contactForm = document.querySelector('.contact-form form');
   if (!contactForm) return;
-  
-  contactForm.addEventListener('submit', async function(e) {
+
+  contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    
+
     // Get form data
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value;
-    
+
     // Validate form data
     if (!name || !email || !subject || !message) {
       showFormMessage('Please fill in all fields', 'error');
       return;
     }
-    
+
     // Disable submit button and show loading state
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
     submitButton.disabled = true;
     submitButton.textContent = 'Sending...';
-    
-    // Submit form data
+
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append('access_key', 'f726b3a5-52e5-4f23-bf97-c111ebecf9db');
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    formData.append('message', message);
+
     try {
-      const response = await portfolioAPI.submitContactForm({
-        name,
-        email,
-        subject,
-        message
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
       });
-      
-      if (response.success) {
-        // Clear form
+
+      const result = await response.json();
+
+      if (response.ok) {
         contactForm.reset();
-        
-        // Show success message
         showFormMessage('Your message has been sent successfully!', 'success');
       } else {
-        // Show error message
-        showFormMessage(response.error || 'Failed to send message. Please try again.', 'error');
+        showFormMessage(result.message || 'Failed to send message. Please try again.', 'error');
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
       showFormMessage('An unexpected error occurred. Please try again later.', 'error');
     } finally {
-      // Re-enable submit button
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
     }
@@ -135,28 +137,20 @@ function initContactForm() {
 }
 
 function showFormMessage(message, type) {
-  // Check if message element already exists
   let messageElement = document.querySelector('.form-message');
-  
-  // Create message element if it doesn't exist
+
   if (!messageElement) {
     messageElement = document.createElement('div');
     messageElement.className = 'form-message';
-    
-    // Insert after form
     const contactForm = document.querySelector('.contact-form form');
     contactForm.parentNode.insertBefore(messageElement, contactForm.nextSibling);
   }
-  
-  // Set message content and class
+
   messageElement.textContent = message;
   messageElement.className = `form-message ${type}`;
-  
-  // Auto-hide message after 5 seconds
+
   setTimeout(() => {
     messageElement.classList.add('hiding');
-    
-    // Remove element after fade out
     setTimeout(() => {
       if (messageElement.parentNode) {
         messageElement.parentNode.removeChild(messageElement);
@@ -164,6 +158,7 @@ function showFormMessage(message, type) {
     }, 500);
   }, 5000);
 }
+
 
 /**
  * Projects Functions
