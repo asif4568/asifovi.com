@@ -571,6 +571,29 @@ function initScript() {
   initLazyLoad();
   initPlayVideoInview();
   initScrolltriggerAnimations();
+  
+  // Fallback hamburger initialization for reliability
+  setTimeout(() => {
+    if (typeof $ !== 'undefined' && $('.btn-hamburger').length > 0) {
+      console.log('Running fallback hamburger check...');
+      // Ensure hamburger is properly initialized
+      $('.btn-hamburger, .btn-menu').off('click').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Fallback hamburger click detected');
+        
+        if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
+          $(".btn-hamburger, .btn-menu").removeClass('active');
+          $("main").removeClass('nav-active');
+          safeScrollStart();
+        } else {
+          $(".btn-hamburger, .btn-menu").addClass('active');
+          $("main").addClass('nav-active');
+          safeScrollStop();
+        }
+      });
+    }
+  }, 1000);
 }
 
 /**
@@ -582,10 +605,6 @@ function initWindowInnerheight() {
   $(document).ready(function(){
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    $('.btn-hamburger').click(function(){
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
   });
 
 }
@@ -624,35 +643,65 @@ function initCheckTouchDevice() {
 function initHamburgerNav() {
     
   // Open/close navigation when clicked .btn-hamburger
+  console.log('Initializing hamburger navigation...');
 
-  $(document).ready(function(){
-    $(".btn-hamburger, .btn-menu").click(function(){
+  // Use event delegation for better reliability
+  $(document).on('click', '.btn-hamburger, .btn-menu', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('Hamburger button clicked');
+    
+    try {
       if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
+          console.log('Closing navigation');
           $(".btn-hamburger, .btn-menu").removeClass('active');
           $("main").removeClass('nav-active');
           safeScrollStart();
       } else {
+          console.log('Opening navigation');
           $(".btn-hamburger, .btn-menu").addClass('active');
           $("main").addClass('nav-active');
           safeScrollStop();
       }
-    });
-    $('.fixed-nav-back').click(function(){
-      $(".btn-hamburger, .btn-menu").removeClass('active');
-      $("main").removeClass('nav-active');
-      safeScrollStart();
-    });
+      
+      // Update viewport height when navigation opens/closes
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      
+    } catch (error) {
+      console.error('Error in hamburger click handler:', error);
+    }
   });
-  $(document).keydown(function(e){
-    if(e.keyCode == 27) {
+  
+  // Background click to close
+  $(document).on('click', '.fixed-nav-back', function(e) {
+    e.preventDefault();
+    console.log('Background clicked - closing navigation');
+    $(".btn-hamburger, .btn-menu").removeClass('active');
+    $("main").removeClass('nav-active');
+    safeScrollStart();
+  });
+  
+  // ESC key to close
+  $(document).on('keydown', function(e) {
+    if(e.keyCode == 27 || e.key === 'Escape') {
       if ($('main').hasClass('nav-active')) {
-          $(".btn-hamburger, .btn-menu").removeClass('active');
-          $("main").removeClass('nav-active');
-          safeScrollStart();
+        console.log('ESC pressed - closing navigation');
+        $(".btn-hamburger, .btn-menu").removeClass('active');
+        $("main").removeClass('nav-active');
+        safeScrollStart();
       } 
     }
   });
-
+  
+  // Ensure hamburger is clickable on mobile
+  $(document).on('touchstart', '.btn-hamburger, .btn-menu', function(e) {
+    e.preventDefault();
+    $(this).trigger('click');
+  });
+  
+  console.log('Hamburger navigation initialized successfully');
 }
 
 /**
@@ -1552,3 +1601,33 @@ setInterval(() => {
     debugScroll();
   }
 }, 5000);
+
+// Add hamburger debugging function
+function debugHamburger() {
+  console.log('=== Hamburger Debug Info ===');
+  console.log('jQuery loaded:', typeof $ !== 'undefined');
+  console.log('Hamburger elements found:', $('.btn-hamburger, .btn-menu').length);
+  console.log('Hamburger elements:', $('.btn-hamburger, .btn-menu'));
+  console.log('Main element exists:', $('main').length);
+  console.log('Main has nav-active class:', $('main').hasClass('nav-active'));
+  console.log('Hamburger has active class:', $('.btn-hamburger, .btn-menu').hasClass('active'));
+  console.log('Fixed nav back exists:', $('.fixed-nav-back').length);
+  console.log('=== End Hamburger Debug ===');
+}
+
+// Make debug function available globally
+window.debugHamburger = debugHamburger;
+
+// Test hamburger functionality
+function testHamburger() {
+  console.log('Testing hamburger functionality...');
+  try {
+    $('.btn-hamburger, .btn-menu').trigger('click');
+    console.log('Hamburger click triggered successfully');
+  } catch (error) {
+    console.error('Error testing hamburger:', error);
+  }
+}
+
+// Make test function available globally
+window.testHamburger = testHamburger;
